@@ -29,7 +29,7 @@ function TableData({data,paginateApi,paginate,totalCount,loading}) {
             title: `${item}`,
             dataIndex: `${item}`,
             key: i,
-            width: 180,
+            width: 120,
             textWrap: 'word-break',
             ellipsis: true,
             fixed: i < 1 ? 'left' : null,
@@ -54,10 +54,10 @@ function TableData({data,paginateApi,paginate,totalCount,loading}) {
                 loading={loading}
                 columns={lp}
                 dataSource={data}
-                // scroll={{
-                //   x: '100%',
-                //   y: 300,
-                // }}
+                scroll={{
+                  x: 200,
+                  y: 300,
+                }}
                 pagination={paginate == true ? {
                   pageSize:20,
                   total: pageCount,
