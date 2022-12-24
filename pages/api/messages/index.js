@@ -8,10 +8,21 @@ export default async function handler(req, response) {
       let query = {}
       let page = req.query.page || 0;
   
-    //   if(req.body.consumer_no) {
-    //     query = {...query, "consumer_no": req.body.consumer_no};
-    //   }
+      if(req.body.name) {
+        query = {...query, "name": req.body.name};
+      }
 
+      if(req.body.mobileId) {
+        query = {...query, "mobileId": req.body.mobileId};
+      }
+
+      if(req.body.fromMobile) {
+        query = {...query, "fromMobile": req.body.fromMobile};
+      }
+
+      if(req.body.age) {
+        query = {...query, "age": req.body.age};
+      }
       
       console.log(query)
       console.log(req.query.page)
