@@ -16,6 +16,7 @@ export default function Home() {
   const [loadingState, setLoadingState] = React.useState(true)
 
   const getData = async (page) => {
+    setLoading(true)
     await axios.get(`/api/messages?page=${parseInt(page)}`)
     .then(res => {
       setTotalCount(res.data.totalCount)
