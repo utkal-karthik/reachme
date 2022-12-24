@@ -41,7 +41,7 @@ export default function Home() {
      <Header />
      <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-12 col-sm-12 col-lg-8">
+        <div className="col-md-12 col-sm-12 col-lg-12">
               <TableData 
                 data={data} 
                 paginateApi={getData}
@@ -49,6 +49,13 @@ export default function Home() {
                 paginate={true}
                 loading={loading}
                 totalCount={totalCount}
+                arrayData={[
+                  {label:"Name",name:"name"},
+                  {label:"Age",name:"age"},
+                  {label:"Time",name:"time",date:true},
+                  {label:"Mobile ID",name:"mobileId"},
+                  {label:"Mobile No",name:"fromMobile"},
+                ]}
               />
         </div>
       </div>

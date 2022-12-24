@@ -2,7 +2,7 @@ import React from "react";
 import Moment from 'react-moment';
 import {Table} from "antd";
 
-function TableData({data,paginateApi,paginate,totalCount,loading}) {
+function TableData({data,paginateApi,paginate,totalCount,loading,arrayData}) {
 
     // let dispatch = useDispatch()
     const [page,setPage] = React.useState(1)
@@ -24,7 +24,7 @@ function TableData({data,paginateApi,paginate,totalCount,loading}) {
     let objectData = data.find((item,index) => index == 0)
     let mapData = objectData ? Object.keys(objectData) : [];
   
-    let lp =  mapData && mapData.map((item,i) => {
+    let lp =  !arrayData ? mapData && mapData.map((item,i) => {
         return {
             title: `${item}`,
             dataIndex: `${item}`,
@@ -33,7 +33,9 @@ function TableData({data,paginateApi,paginate,totalCount,loading}) {
             textWrap: 'word-break',
             ellipsis: true,
             fixed: i < 1 ? 'left' : null,
-            sorter: true,
+            sorter: (a, b) => {
+              return a[item.name] - b[item.name]
+            },
             render: (val) => (
               <>
                 {
@@ -41,6 +43,32 @@ function TableData({data,paginateApi,paginate,totalCount,loading}) {
                 }
               </>
             )
+        }
+    }) : arrayData.map((item,i) => {
+          return {
+            title: `${item.label}`,
+            dataIndex: `${item.name}`,
+            key: i,
+            width: 180,
+            textWrap: 'break-word',
+            ellipsis: true,
+            sorter: (a, b) => {
+              return a[item.name] - b[item.name]
+            },
+            render: (val,record) => {
+              
+              return(
+                <>
+                  {
+                    item.date == true ? 
+                    <>
+                      <Moment format="DD/MM/YYYY">{val}</Moment> <br />
+                      <Moment format="hh:mm:ss A">{val}</Moment>
+                    </> : val
+                  }
+                </>
+              )
+            }
         }
     })
   
