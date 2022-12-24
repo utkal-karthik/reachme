@@ -8,20 +8,20 @@ export default async function handler(req, response) {
       let query = {}
       let page = req.query.page || 0;
   
-      if(req.body.name) {
-        query = {...query, "name": req.body.name};
+      if(req.query.name) {
+        query = {...query, "name": req.query.name};
       }
 
-      if(req.body.mobileId) {
-        query = {...query, "mobileId": req.body.mobileId};
+      if(req.query.mobileId) {
+        query = {...query, "mobileId": req.query.mobileId};
       }
 
-      if(req.body.fromMobile) {
-        query = {...query, "fromMobile": req.body.fromMobile};
+      if(req.query.fromMobile) {
+        query = {...query, "fromMobile": req.query.fromMobile};
       }
 
-      if(req.body.age) {
-        query = {...query, "age": req.body.age};
+      if(req.query.age) {
+        query = {...query, "age": req.query.age};
       }
       
       console.log(query)
