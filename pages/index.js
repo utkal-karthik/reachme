@@ -13,22 +13,28 @@ export default function Home() {
   const [data,setData] = React.useState([])
   const [totalCount,setTotalCount] = React.useState('')
   const [loading,setLoading] = React.useState(true)
+  const [loadingState, setLoadingState] = React.useState(true)
 
-  const getData = async (page) => [
-    await axios.get(`/api/messages?page=${page}`)
+  const getData = async (page) => {
+    await axios.get(`/api/messages?page=${parseInt(page)}`)
     .then(res => {
       setTotalCount(res.data.totalCount)
       setData(res.data.data)
       setLoading(false)
     }) 
     .catch(err => console.log(JSON.stringify(err)))
-  ]
+  }
 
   React.useEffect(() => {
     let user = localStorage.getItem('user')
     !user ? setLoggedIn(false) : setLoggedIn(true)
     getData(0)
+    setLoadingState(false)
   },[])
+
+  if(loadingState) {
+    return 'Loading.....'
+  }
 
   if(!loggedIn) {
     return <Login />
@@ -44,7 +50,7 @@ export default function Home() {
         <div className="col-md-12 col-sm-12 col-lg-12">
               <TableData 
                 data={data} 
-                paginateApi={getData}
+                paginateApi={(page) => getData(page)}
                 filters={{}}
                 paginate={true}
                 loading={loading}

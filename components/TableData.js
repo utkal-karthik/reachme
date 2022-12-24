@@ -5,7 +5,7 @@ import {Table} from "antd";
 function TableData({data,paginateApi,paginate,totalCount,loading,arrayData}) {
 
     // let dispatch = useDispatch()
-    const [page,setPage] = React.useState(1)
+    const [mainPage,setPage] = React.useState(1)
   
     if(!data) {
       return (
@@ -16,10 +16,9 @@ function TableData({data,paginateApi,paginate,totalCount,loading,arrayData}) {
         </>
       )
     }
-    console.log('data')
-    console.log(data)
     
-    let pageCount = Math.ceil(parseInt(totalCount) / 20);
+    let pageCount = Math.ceil(totalCount / 20);
+
   
     let objectData = data.find((item,index) => index == 0)
     let mapData = objectData ? Object.keys(objectData) : [];
@@ -88,11 +87,11 @@ function TableData({data,paginateApi,paginate,totalCount,loading,arrayData}) {
                 }}
                 pagination={paginate == true ? {
                   pageSize:20,
-                  total: pageCount,
-                  current: page,
+                  total: totalCount,
+                  current: mainPage,
                   onChange: (page) => {
                     setPage(page)
-                    paginateApi({page:page})
+                    paginateApi(page - 1)
                   },
                 } : {showSizeChanger:true,pageSize:20}}
               />
